@@ -1,0 +1,89 @@
+// task 01
+import java.util.Scanner;
+
+public class task01 {
+    public static void main(String[] args) {
+        // Take input
+        System.out.println("Please enter your time (in minutes): ");
+        Scanner scn = new Scanner(System.in);
+        int minutes = scn.nextInt();
+
+        // Convert
+        if(minutes >= 0){
+            int days = minutes / (24 * 60);
+            int years = days / 365;
+            int leftover_days = days % 365;
+
+            if(leftover_days == 0){
+                System.out.println("Converted time is: " + years + " years.");
+            }
+            else {
+                System.out.println("Converted time is: " + years + " years and " + leftover_days + " days.");
+            }
+        }
+        else {
+            System.out.println("Please don't input negative values.");
+        }
+    }
+}
+
+// task 02
+public class task02 {
+    public static void main(String[] args) {
+        // Assign variables
+        int a = 2;
+        int b = 5;
+        int c = 8;
+
+        // Calculate results
+        int d = ((2 * b) * ((c - a) / 3) + 7);
+        System.out.println("a, b, c are: " + a + ", " + b + ", " + c + " and calculated result d is: " + d);
+    }
+}
+
+// task 03
+public class task03 {
+    public static void main(String[] args) {
+        // Declare variables
+        int sid = 1000054943;
+
+        // Calculate the lat and second last digits
+        int l01digit = sid - ((sid / 10) * 10);
+        int l02digit = (sid - ((sid / 100) * 100)) / 10;
+        System.out.println("Student ID is: " + sid);
+        System.out.println("Last and 2nd last digits are: " + l01digit + " and " + l02digit);
+        System.out.println("Last two digits reversed are: " + l01digit + "" + l02digit);
+    }
+}
+
+// task 04
+public class task04 {
+    public static void main(String[] args) {
+        // Declare variables
+        int w = 13;
+        int l = 10;
+        System.out.println("Width and Length are: " + w + " and " + l);
+
+        // Calculate diag
+        double diag = Math.sqrt((w * w) + (l * l));
+        System.out.println("Diagonal of the room is: " + diag);
+    }
+}
+
+// task 05
+public class task05 {
+    public static void main(String[] args) {
+        // Declare variables
+        double a = 4.5;
+        double b = 9.5;
+        double c = Math.sqrt((a * a) + (b * b));
+        System.out.println("Values of a, b, c are: " + a + ", " + b + ", " + c);
+
+        // Calculate trigonmetric ratios
+        double sinA = a / c;
+        double cosA = b / c;
+        double sinB = b / c;
+        double cosB = a / c;
+        System.out.println("Values of sinA, cosA, sinB, cosB are: " + sinA + ", " + cosA + ", " + sinB + ", " + cosB);
+    }
+}
