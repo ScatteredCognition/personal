@@ -1,0 +1,220 @@
+// task 01
+import java.util.Scanner;
+
+public class task01 {
+    public static void main(String[] args){
+        // Take input
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Enter number: ");
+        int input = scn.nextInt();
+
+        // Check input
+        if((input % 5 == 0) && (input % 7 == 0)){
+            System.out.println("Invalid: Divisible by both");
+        } else if (input % 5 == 0){
+            System.out.println("Divisible by 5 only");
+        } else if (input % 7 == 0){
+            System.out.println("Divisible by 7 only");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+
+// task 02
+import java.util.Scanner;
+
+public class task02 {
+    public static void main(String[] args) {
+        // Take input
+        Scanner scn = new Scanner(System.in);
+        System.out.print("Age (years): ");
+        int age = scn.nextInt();
+        System.out.print("Energy consumed (kWh): ");
+        int energy = scn.nextInt();
+
+        // Calculate bill
+        double rate = 15; // 15tk per kWh
+        double bill = energy * rate; // initial bill
+
+        if(age < 18){
+            bill = bill * (1.0 - 0.2); // 20% discount
+        } else if((age >= 18) && (age <= 60)){
+            bill = bill; // no discount
+        } else if(age > 60){
+            bill = bill * (1.0 - 0.1); // 10% discount
+        }
+
+        if(energy > 100){
+            bill = bill + (bill * 0.05); // 5% surcharge
+        }
+
+        // PRint bill
+        System.out.println("Final bill: " + bill + " Taka");
+
+    }
+}
+
+// task 03
+import java.util.Scanner;
+
+public class task03 {
+    public static void main(String[] args) {
+        // Take input
+        Scanner scn = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        float num1 = scn.nextFloat();
+        System.out.print("Enter second number: ");
+        float num2 = scn.nextFloat();
+        System.out.print("Enter third number: ");
+        float num3 = scn.nextFloat();
+
+        // Find largest
+        if(num1 >= num2){
+            if(num1 >= num3){
+                System.out.println("Maximum number is: " + num1);
+            } else {
+                System.out.println("Maximum number is: " + num3);
+            }
+        } else if (num2 >= num3){
+            System.out.println("Maximum number is: " + num2);
+        } else {
+            System.out.println("Maximum number is: " + num3);
+        }
+
+        // Find smallest
+        if(num1 <= num2){
+            if(num1 <= num3){
+                System.out.println("Minimum number is: " + num1);
+            } else {
+                System.out.println("Minimum number is: " + num3);
+            }
+        } else if (num2 <= num3){
+            System.out.println("Minimum number is: " + num2);
+        } else {
+            System.out.println("Minimum number is: " + num3);
+        }
+    }
+}
+
+// task 04
+import java.util.Scanner;
+
+public class task04 {
+    public static void main(String[] args) {
+        // Take input
+        Scanner scn = new Scanner(System.in);
+        System.out.print("Enter first side: ");
+        int num1 = scn.nextInt();
+        System.out.print("Enter second side: ");
+        int num2 = scn.nextInt();
+        System.out.print("Enter third side: ");
+        int num3 = scn.nextInt();
+
+        // Check for triangle type
+        if((num1 == num2) && (num2 == num3)){
+            System.out.println("This is a Equilateral Triangle");
+        }
+        else if(((num1 == num2) || (num2 == num3) || (num1 == num3)) && ((num1 != num2) || (num2 != num3) || (num1 != num3)) ){
+            System.out.println("This is a Isosceles Triangle");
+        }
+        else {
+            System.out.println("This is a Scalene Triangle");
+        }
+
+    }
+}
+
+// task 05
+import java.util.Scanner;
+
+public class task05 {
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        System.out.print("Enter the amount the customer need to pay(Taka): ");
+        int bill = scn.nextInt();
+        System.out.print("Enter the amount, customer gave(Taka): ");
+        int paid = scn.nextInt();
+
+        // Calculate ret
+        int ret = paid - bill;
+        int note_100 = 0;
+        int note_50 = 0;
+        int note_20 = 0;
+        int note_10 = 0;
+        int coin_5 = 0;
+        int coin_2 = 0;
+        int coin_1 = 0;
+
+        if(ret < 0){
+            System.out.println("Please pay " + (-1 * ret) + " taka more.");
+        } else if(ret == 0){
+            System.out.println("The returned amount is 0 taka.");
+        } else {
+            System.out.println("The returned amount is " + ret + " taka.");
+            while(ret > 0){
+                while(ret >= 100){
+                    note_100 = note_100 + 1;
+                    ret = ret - 100;
+                }
+                while(ret >= 50){
+                    note_50 = note_50 + 1;
+                    ret = ret - 50;
+                }
+                while(ret >= 20){
+                    note_20 = note_20 + 1;
+                    ret = ret - 20;
+                }
+                while(ret >= 10){
+                    note_10 = note_10 + 1;
+                    ret = ret - 10;
+                }
+                while(ret >= 5){
+                    coin_5 = coin_5 + 1;
+                    ret = ret - 5;
+                }
+                while(ret >= 2){
+                    coin_2 = coin_2 + 1;
+                    ret = ret - 2;
+                }
+                while(ret >= 1){
+                    coin_1 = coin_1 + 1;
+                    ret = ret - 1;
+                }
+            }
+
+            System.out.println("100 taka note: " + note_100);
+            System.out.println("50 taka note: " + note_50);
+            System.out.println("20 taka note: " + note_20);
+            System.out.println("10 taka note: " + note_10);
+            System.out.println("5 taka coin: " + coin_5);
+            System.out.println("2 taka coin: " + coin_2);
+            System.out.println("1 taka coin: " + coin_1);
+        }
+    }
+}
+
+// task 06
+import java.util.Scanner;
+
+public class task06 {
+    public static void main(String[] args) {
+        // Take num
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        int num1 = scanner.nextInt();
+        System.out.print("Enter second number: ");
+        int num2 = scanner.nextInt();
+        System.out.print("Enter third number: ");
+        int num3 = scanner.nextInt();
+
+        // Check
+        if ((num1 == num2) && (num2 == num3)) {
+            System.out.println("All numbers are equal.");
+        } else if ((num1 == num2) || (num2 == num3) || (num1 == num3)) {
+            System.out.println("Neither all are equal nor different");
+        } else {
+            System.out.println("All numbers are different");
+        }
+    }
+}
