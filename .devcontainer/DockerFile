@@ -6,4 +6,3 @@ RUN apk add --no-cache bash git openssh-client curl
 # Extras
 WORKDIR /workspace
 USER root
-CMD ["bash"]
