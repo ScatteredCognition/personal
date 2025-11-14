@@ -1,0 +1,22 @@
+{
+  "name": "Alpine Java 8 Dev Container",
+  "build": {
+    "dockerfile": "DockerFile"
+  },
+  "runArgs": [
+    "--userns=keep-id"
+    //,"--security-opt=label=disable"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "bash"
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  },
+  "remoteUser": "dev",
+  "postCreateCommand": "java -version"
+}
