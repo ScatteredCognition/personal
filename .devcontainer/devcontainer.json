@@ -4,7 +4,8 @@
     "dockerfile": "DockerFile"
   },
   "runArgs": [
-    "--userns=keep-id"
+    //"--userns=keep-id"
+    //,"--format docker"
     //,"--security-opt=label=disable"
   ],
   "customizations": {
@@ -16,6 +17,8 @@
         "vscjava.vscode-java-pack"
       ]
     }
-  },
-  "postCreateCommand": "java -version"
+  }
+  //,"remoteUser": "faeizmahrus",
+  //"updateRemoteUserUID": true,
+  //"postCreateCommand": "id"
 }
