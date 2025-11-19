@@ -1,0 +1,148 @@
+// task 01
+import java.util.Scanner;
+
+public class task01 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your number: ");
+        int inp = sc.nextInt();
+        int digit = 0;
+        int sum = 0;
+
+        // Operate on idividual digits
+        for(int i = 1; inp/i != 0; i *= 10){
+            // calculate digit
+            digit = ( ( inp%( i*10 ) ) - ( inp%i ) );
+            if(digit > 10){
+                digit = digit/i;
+            }
+            // make sum
+            sum += digit*digit*digit;
+        }
+
+        // print result
+        if(sum == inp){
+            System.out.println(inp + " is an Armstrong number.");
+        } else {
+            System.out.println(inp + " is not an Armstrong number.");
+        }
+    }
+}
+
+// task 02
+import java.util.Scanner;
+
+public class task02 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of students to check: ");
+        int scount = sc.nextInt();
+
+        // take student id
+        for(int i = 0; i<scount; i++){
+            System.out.println("Enter student id: ");
+            int sid = sc.nextInt();
+
+            int sdiv = 0;
+            int sidLucky=0;
+            while(sdiv<=sid){
+                if((sid == sdiv)||(sid == 1)){
+                    System.out.println("Lucky ID");
+                    sidLucky=1;
+                    break;
+                }
+                
+                //System.out.println("sdiv: " + sdiv);
+                if(sdiv == 0){
+                    sdiv = 2;
+                } else {
+                    sdiv = sdiv * 2;
+                }
+            }
+
+            if(sidLucky == 0){
+                System.out.println("Not Lucky ID");
+            }
+        }
+    }
+}
+
+//task 03
+import java.util.Scanner;
+
+public class task03 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of days");
+        int days = sc.nextInt();
+
+        for(int i = 1; i <= days; i++){
+            System.out.println("Enter sales for Day " + i + ": ");
+            double sale = 0;
+            double tax = 0;
+
+            for(int j = 0; j<3; j++){
+                sale = sale + sc.nextDouble();
+            }
+
+            if(sale>=100){
+                tax = sale*0.02;
+
+                if(sale>=200){
+                    tax = sale*0.05;
+
+                    if(sale>=500){
+                        tax = sale*0.10;
+                    }
+                }
+            }
+
+            System.out.println("Day " + i + ": Total Sales with Tax: " + (sale+tax));
+        }
+    }
+}
+
+//task 04
+import java.util.Scanner;
+
+public class task04 {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Number of Members: ");
+        int mcount = sc.nextInt();
+
+        for(int i = 1; i <= mcount; i++){
+            System.out.println("Exercises for Member-" + i + ": ");
+            int ecount = sc.nextInt();
+            if(ecount > 3){
+                System.out.println("(Can’t do more than 3 exercise)");
+                ecount = 3;
+            }
+            double calorie = 0;
+            double bonus = 0;
+
+            for(int j = 1; j<= ecount; j++){
+                System.out.println("Exercise-" + j + ": ");
+                double curcal = sc.nextDouble();
+                double curbon = 0;
+                calorie += curcal;
+
+                if(curcal<200){
+                    curbon = curcal*-0.1;
+                } else if(curcal > 350){
+                    curbon = curcal*0.50;
+                }
+                
+                //System.out.println(curbon);
+                bonus += curbon;
+            }
+
+            double avg = ((calorie+bonus)/3);
+            if(avg > 400){
+                avg += 50;
+            }
+
+            System.out.println("Average calories earned per day for Member-" + i + ": " + avg);
+        }
+    }
+}
