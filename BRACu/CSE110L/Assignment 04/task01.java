@@ -13,7 +13,7 @@ public class task01 {
         for(int i = 1; inp/i != 0; i *= 10){
             // calculate digit
             digit = ( ( inp%( i*10 ) ) - ( inp%i ) );
-            if(digit > 10){
+            if(digit >= 10){
                 digit = digit/i;
             }
             // make sum
