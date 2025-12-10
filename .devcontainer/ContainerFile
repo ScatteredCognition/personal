@@ -3,8 +3,7 @@ FROM docker.io/library/eclipse-temurin:8-alpine
 
 # Install the basics
 RUN apk add --no-cache \
-    bash bash-completion \
-    fish fish-completion \
+    bash bash-completion fish \
     git openssh-client curl \
     && \
     curl -fsSL \
