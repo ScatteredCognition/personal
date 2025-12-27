@@ -1,0 +1,179 @@
+//task01
+import java.util.Scanner;
+
+public class task01 {
+    public static boolean isPrime(int num){
+        //calculates prime numbers based on prime nums upto 31
+        boolean flag = true;
+        int[] par = {2, 3, 4, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        for(int i = 0; i < par.length - 1; i++){
+            if((num % par[i] == 0) && (num != par[i])){
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    public static boolean isPerfect(int num){
+        //all known perfect numbers are even
+        boolean flag = false;
+
+        if(num % 2 == 1){
+            return flag;
+        }
+
+        //otherwise, find  sum of dividers
+        int divsum = 0;
+        for(int i = 1; i < num; i++){
+            if(num % i == 0){
+                divsum += i;
+            }
+        }
+
+        if(divsum == num){
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    public static int special_sum(int num){
+        int sum = 0;
+        for(int i = 1; i < num; i++){
+
+            if(isPrime(i) == true){
+                sum += i;
+            }
+
+            if(isPerfect(i) == true){
+                sum += i;
+            }
+
+            //System.out.println("i = " + sum + " sum = " + sum + "prime, per" + isPrime(i) + isPerfect(i));
+        }
+        return sum;
+    }
+
+    public static void main(String[] args){
+        boolean check = false; 
+        check = isPrime(7);
+        System.out.println("isPrime(7) = " + check);
+        check = isPrime(15);
+        System.out.println("isPrime(15) = " + check);
+        check = isPerfect(6);
+        System.out.println("isPerfect(6) = " + check);
+        check = isPerfect(33);
+        System.out.println("isPerfect(33) = " + check);
+        int spsum = 0;
+        spsum = special_sum(8);
+        System.out.println("special_sum(8) = " + spsum);
+    }
+}
+
+//task02
+import java.util.Scanner;
+
+public class task02 {
+
+    public static void showDots(int num){
+        for(int i = 0; i < num; i++){
+            System.out.print(".");
+        }
+        //System.out.println("");
+    }
+
+    public static void show_palindrome(int num){
+        //start
+        for(int i = 1; i <= num; i++){
+            System.out.print(i);
+        }
+        //end
+        for(int i = (num - 1); i > 0; i--){
+            System.out.print(i);
+        }
+        //System.out.println("");
+    }
+
+    public static void showDiamond(int num){
+        for(int i = 1; i <= num; i++){
+            showDots(num - i);
+            show_palindrome(i);
+            showDots(num - i);
+            System.out.println("");
+        }
+
+        for(int i = (num - 1); i > 0; i--){
+            showDots(num - i);
+            show_palindrome(i);
+            showDots(num - i);
+            System.out.println("");
+        }
+    }
+
+    public static void main(String[] args){
+        showDots(5);
+        System.out.println("");
+        showDots(3);
+        System.out.println("");
+        show_palindrome(5);
+        System.out.println("");
+        show_palindrome(3);
+        System.out.println("");
+        showDiamond(5);
+        showDiamond(3);
+    }
+}
+
+//task03
+import java.util.Scanner;
+
+public class task03 {
+
+    public static double calcTax(int age, double sal){
+        double tax = 0.0;
+
+        if((age < 18) || (sal < 10000.0)){
+            return tax;
+        }
+
+        if((sal >= 10000.0) && (sal <= 20000.0)){
+            tax = sal * 0.07;
+        }
+
+        if(sal > 20000.0){
+            tax = sal * 0.14;
+        }
+
+        return tax;
+    }
+
+    public static void calcYearlyTax(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome to income tax calculator.");
+        
+        System.out.print("Enter your age: ");
+        int agein = sc.nextInt();
+        
+        double[] month = new double[12];
+        double sum = 0.0;
+        for(int i = 0; i < (month.length - 1); i++){
+            System.out.print("Enter your salary (month " + (i+1) + ") : ");
+            double salin = sc.nextDouble();
+            month[i] = calcTax(agein, salin);
+            sum += month[i];
+            System.out.println("Tax for month " + (i+1) + ": " + month[i]);
+        }
+
+        System.out.println("Total Yearly Tax: " + sum);
+
+    }
+
+    public static void main(String[] args){
+        double t = 0.0;
+        t = calcTax(16,20000);
+        System.out.println("Age: 16, Salary: 20000, Tax: " + t);
+        t = calcTax(20,18000);
+        System.out.println("Age: 20, Salary: 18000, Tax: " + t);
+        calcYearlyTax();
+    }
+}
