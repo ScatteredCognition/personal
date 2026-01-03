@@ -1,3 +1,0 @@
-set -Ux RUSTUP_HOME "/rustup"
-set -Ux CARGO_HOME "/cargo"
-fish_add_path -Uv "$CARGO_HOME/bin"

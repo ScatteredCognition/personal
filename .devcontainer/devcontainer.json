@@ -1,8 +1,6 @@
 {
-  "name": "Alpine Devcontainer - Base",
-  "build": {
-    "dockerfile": "ContainerFile"
-  },
+  "name": "Alpine Devcontainer - Base (GHCR)",
+  "image": "ghcr.io/scatteredcognition/devcon-alp:latest",
   "customizations": {
     "vscode": {
       "settings": {
