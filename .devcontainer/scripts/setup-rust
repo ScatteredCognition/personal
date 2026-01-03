@@ -1,4 +1,15 @@
 #!/usr/bin/env fish
-apk add --no-cache curl
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-fish_add_path ~/.cargo/bin
+if test (id -u) -eq 0
+    echo "Running as root."
+else
+    echo "Please run this command using doas or sudo."
+    exit 0
+end
+
+apk add --no-cache curl build-base rustup
+
+mkdir -p /rustup
+mkdir -p /cargo/bin
+mv /etc/fish/conf.d/rust-path.fish.bak /etc/fish/conf.d/rust-path.fish
+
+rustup-init --no-modify-path

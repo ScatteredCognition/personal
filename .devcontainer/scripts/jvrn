@@ -2,8 +2,11 @@
 for file in "$@"; do
     if javac "$file"; then
         java $(basename "$file" .java)
-        rm -f "$file".class
+        rm -f $(basename "$file" .java).class
+        echo "Compiled and ran $file"
         echo "Press any key to continue."
         read -n 1 -s _
+    else
+        echo "Error during compiling $file"
     fi 
 done
