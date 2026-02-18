@@ -1,0 +1,122 @@
+//task01
+import java.util.Scanner;
+
+public class task01 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter two numbers: ");
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        // setup
+        int small = 0;
+        int big = 0;
+        int primec = 0;
+        int pprimec = 0;
+        if (a > b) {
+            small = b;
+            big = a;
+        } else {
+            small = a;
+            big = b;
+        }
+
+        // main loop
+        for (int i = small; i < big; i++) {
+            // see if divisible
+            boolean div = false;
+            for (int j = 2; j < i - 1; j++) {
+                if (i % j != 0) {
+                    continue;
+                } else {
+                    div = true;
+                }
+            }
+
+            // if no div happened
+            if (div == false) {
+                primec++;
+            }
+        }
+
+        //print result
+        System.out.println(
+            "There are " + primec + " prime numbers between " + small + " and " + big
+        );
+    }
+}
+
+//task02
+import java.util.Scanner;
+
+public class task02 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String inp = sc.nextLine().toLowerCase();
+        StringBuilder sb = new StringBuilder("");
+        // main loop
+        for (int i = 0; i < inp.length(); i++) {
+            char ch = inp.charAt(i);
+            if (ch == 'a') {
+                sb.append("z");
+            } else {
+                sb.append((char) (ch - 1));
+            }
+        }
+        // print result
+        String out = sb.toString();
+        System.out.println(out);
+    }
+}
+
+//task03
+import java.util.Scanner;
+
+public class task03 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("N = ");
+        int N = sc.nextInt();
+        int[] ar = new int[N];
+        int[] oar = new int[N];
+        for (int i = 0; i < N; i++) {
+            ar[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (ar[i] == ar[j]) {
+                    oar[i]++;
+                }
+            }
+        }
+
+        // print result
+        for (int i = 0; i < N; i++) {
+            boolean shown = false;
+            for (int j = i; j >= 0; j--) {
+                if (j == i) {
+                    continue;
+                } else if (ar[i] == ar[j]) {
+                    shown = true;
+                }
+            }
+
+            if (shown == false) {
+                System.out.print(ar[i] + " - ");
+                System.out.println(oar[i] + " times");
+            }
+        }
+    }
+}
+
+//task04
+public class CSECourse {
+
+    public String courseName = "Programming Language II";
+    public String courseCode = "CSE111";
+    public int credit = 3;
+}
