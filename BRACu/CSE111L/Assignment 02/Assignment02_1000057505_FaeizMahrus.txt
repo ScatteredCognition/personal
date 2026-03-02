@@ -1,0 +1,140 @@
+//task 01
+public class ImaginaryNumber {
+
+    public int realPart;
+    public int imaginaryPart;
+
+    public String printNumber() {
+        return this.realPart + " + " + this.imaginaryPart + "i";
+    }
+}
+
+//task 02
+public class Assignment {
+    public int tasks;
+    public String difficulty;
+    public boolean submission;
+
+    public void printDetails(){
+        System.out.println("Number of tasks: " + this.tasks);
+        System.out.println("Difficulty level: " + this.difficulty);
+        System.out.println("Submission required: " + this.submission);
+    }
+
+    public String makeOptional(){
+        if(this.submission == true){
+            this.submission = false;
+            return "Assignment will not require submission" ;
+        } else {
+            return "Submission is already not required" ;
+        }
+    }
+}
+
+//task 03
+public class Employee {
+    public String name;
+    public String title;
+    public double salary;
+
+    public void newEmployee(String name){
+        this.name = name;
+        this.title = "junior";
+        this.salary = 30000.0;
+    }
+
+    public void displayInfo(){
+        System.out.println("Employee Name: " + this.name);
+        System.out.println("Employee Salary: " + this.salary + " Tk");
+        System.out.println("Employee Designation: " + this.title);
+    }
+
+    public void calculateTax(){
+        if(salary <= 30000.0){
+            System.out.println("No need to pay tax");
+        } else if(salary > 30000.0 && salary <= 50000.0){
+            System.out.println(this.name + " Tax Amount: " + this.salary*0.1 + " Tk");
+        } else if(salary > 50000.0){
+            System.out.println(this.name + " Tax Amount: " + this.salary*0.3 + " Tk");
+        }
+    }
+
+    public void promoteEmployee(String title){
+        this.title = title;
+        if(title.toLowerCase() == "senior"){
+            this.salary += 25000.0;
+        } else if(title.toLowerCase() == "lead"){
+            this.salary += 50000.0;
+        } else if(title.toLowerCase() == "manager"){
+            this.salary += 75000.0;
+        }
+
+        System.out.println(this.name + " has been promoted to " + this.title);
+        System.out.println("New Salary: " + this.salary + " Tk");
+    }
+}
+
+//task 04
+public class MobilePhone {
+    int cMax;
+    int cTotal;
+    String cName[];
+    int cNumber[];
+
+    public void setContactCapacity(int cMax){
+        int cMaxold = this.cMax;
+        this.cMax = cMax;
+        String cNametmp[] = new String[this.cMax];
+        int cNumbertmp[] = new int[this.cMax];
+
+        //copy contacts
+        for(int i = 0; i < cMaxold; i++){
+            cNametmp[i] = this.cName[i];
+            cNumbertmp[i] = this.cNumber[i];
+        }
+
+        this.cName = new String[this.cMax];
+        this.cNumber = new int[this.cMax];
+
+        for(int i = 0; i < this.cMax; i++){
+            this.cName[i] = this.cName[i];
+            this.cNumber[i] = this.cNumber[i];
+        }
+    }
+
+    public void details(){
+        System.out.println("Total Contacts: " + this.cTotal);
+        System.out.println("Contact List: ");
+
+        for(int i = 0; i < this.cTotal; i++){
+            System.out.println(this.cName[i] + ":" + this.cNumber[i]);
+        }
+    }
+
+    public void addContact(String cName, int cNumber){
+        if(this.cTotal >= this.cMax){
+            System.out.println("Storage Full!!");
+        } else {
+            this.cName[this.cTotal] = cName;
+            this.cNumber[this.cTotal] = cNumber;
+            System.out.println("Contact of " + cName + " is added.");
+            this.cTotal++;
+
+        }
+    }
+
+    public void makeCall(int number){
+        boolean called = false;
+        for(int i = 0; i < this.cTotal; i++){
+            if(number == cNumber[i]){
+                System.out.println("Calling " + cName[i] + " . . .");
+                called = true;
+                break;
+            }
+        }
+
+        if(called == false){
+            System.out.println("Calling " + number + " . . .");
+        }
+    }
+}
