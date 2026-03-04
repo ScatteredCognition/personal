@@ -1,0 +1,219 @@
+// task01
+public class Toy {
+    public String name;
+    public int price;
+
+    public Toy(String name, int price){
+        this.name = name;
+        this.price = price;
+        System.out.println("A new toy has been made!");
+    }
+
+    public void updateName(String newname){
+        System.out.println("Changing old name: " + this.name);
+        System.out.println("new name: " + newname);
+        this.name = newname;
+    }
+
+    public void updatePrice(int newprice){
+        this.price = newprice;
+    }
+
+    public void showPrice(){
+        System.out.println("price: " + this.price + " Taka");
+    }
+}
+
+// task02
+public class Cart {
+    public int maxItemCount = 3;
+    public String[] itemName = new String[maxItemCount];
+    public double[] itemPrice = new double[maxItemCount];
+    public int cartNumber;
+    int currentItem = 0;
+    double discount = 0;
+
+    public void create_cart(int cartNumber){
+        this.cartNumber = cartNumber;
+        //// Copying the variables to new, expanded arrays
+        //// So a situation where the maxcount changes after
+        //// There are already items in the carts never happens
+//
+        //// Swapping the old max count
+        //int oldItemCount = this.maxItemCount;
+        //this.maxItemCount = maxItemCount;
+        //
+        //// Copying old variables to new temp ones
+        //String[] itemNameTemp = this.itemName;
+        //double[] itemPriceTemp = this.itemPrice;
+//
+        //// Making new variables with updated array sizes
+        //this.itemName = new String[this.maxItemCount];
+        //this.itemPrice = new double[this.maxItemCount];
+        //
+        //// Update name and price from temp variables
+        //for(int i = 0; i < oldItemCount; i++){
+        //    this.itemName[i] = itemNameTemp[i];
+        //    this.itemPrice[i] = itemPriceTemp[i];
+        //}
+//
+        //if(currentItem > this.maxItemCount){
+        //    currentItem = this.maxItemCount;
+        //}
+        
+    }
+
+    public void addItem(String name, double price){
+        if(this.currentItem >= this.maxItemCount){
+            System.out.println("You already have " + this.maxItemCount + " items on your cart");
+        } else {
+            ++currentItem;
+            this.itemName[currentItem-1] = name;
+            this.itemPrice[currentItem-1] = price;
+            System.out.println(this.itemName[currentItem-1] + " added to cart " + this.cartNumber + ".");
+            System.out.println("You have " + (this.currentItem + 0) + " item(s) in your cart now." );
+        }
+    }
+
+    // Shim for the reversed naming stuff
+    public void addItem(double price, String name){
+        this.addItem(name, price);
+    }
+
+    public void cartDetails(){
+        System.out.println("Your cart" + "(c" + this.cartNumber + ")" +" :");
+        double total = 0;
+        for(int i = 0; i < this.currentItem; i++){
+            total += this.itemPrice[i];
+        }
+        total *= ((100.0 - this.discount)/100.0);
+
+        for(int i = 0; i < this.currentItem; i++){
+            System.out.println(this.itemName[i] + " - " + this.itemPrice[i]);
+        }
+
+        System.out.println("Discount Applied: " + this.discount + "%");
+        System.out.println("Total Price: " + total);
+    }
+
+    public void giveDiscount(double discount){
+        this.discount = discount;
+
+    }
+}
+
+// task 03
+public class Reader {
+    String name;
+    int capacity = 2;
+    int currentBook = -1;
+    String[] book = new String[capacity];
+
+    public Reader(String name){
+        this.name = name;
+        System.out.println("A new reader is created!");
+    }
+
+    public Reader(String name, int capacity){
+        this.name = name;
+        this.capacity = capacity;
+        this.book = new String[this.capacity];
+        System.out.println("A new reader is created!");
+    }
+
+    public void readerInfo(){
+        System.out.println("Name: " + this.name);
+        System.out.println("Capacity: " + this.capacity);
+        System.out.println("Books: ");
+
+        if(currentBook > -1){
+            for(int i = 0; i < this.currentBook; i++){
+                System.out.println("Book " + (i +1) + ": " + this.book[i]);
+            }
+        } else {
+            System.out.println("No books added yet");
+        }
+    }
+
+    public void addBook(String bookName){
+        if(this.currentBook < 0){
+            this.currentBook = 0;
+        }
+
+        if(this.currentBook >= this.capacity){
+            System.out.println("No more capacity");
+        } else {
+            this.book[this.currentBook] = bookName;
+            this.currentBook++;
+        }
+    }
+
+    public void updateCapacity(int capacity){
+        // Copying the variables to new, expanded arrays
+        // So a situation where the maxcount changes after
+        // There are already items in the carts never happens
+
+        // Swapping the old capacity
+        int oldcapacity = this.capacity;
+        this.capacity = capacity;
+        
+        // Copying old variables to new temp ones
+        String[] booktemp = this.book;
+
+        // Making new variables with updated array sizes
+        this.book = new String[this.capacity];
+        
+        // Update book names from temp variables
+        for(int i = 0; i < oldcapacity; i++){
+            this.book[i] = booktemp[i];
+        }
+    }
+}
+
+// task 04
+public class MoneyTracker {
+    String name;
+    double balance;
+    double lastAdded;
+    double lastSpent;
+
+    public MoneyTracker(){
+        System.out.println("A new money tracker has been launched.");
+    }
+
+    public String info(){
+        return "Name: " + this.name + "\n" + "Current Balance: " + this.balance;
+    }
+
+    public void createTracker(String name){
+        this.name = name;
+        this.balance = 1;
+        //System.out.println(this.info());
+    }
+
+    public void income(double income){
+        this.balance += income;
+        this.lastAdded = income;
+        System.out.println("Balance Updated!");
+    }
+
+    public void expense(double expense){
+        if(expense > this.balance){
+            System.out.println("Not enough balance.");
+        } else if(expense == this.balance){
+            System.out.println("You're broke!");
+            this.balance -= expense;
+            this.lastSpent = expense;
+        } else {
+            System.out.println("Balance Updated.");
+            this.balance -= expense;
+            this.lastSpent = expense;
+        }
+
+    }
+
+    public void showHistory(){
+        System.out.println("Last added: " + this.lastAdded);
+        System.out.println("Last spent: " + this.lastSpent);
+    }
+}
