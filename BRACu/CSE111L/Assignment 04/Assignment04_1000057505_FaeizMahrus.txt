@@ -1,0 +1,264 @@
+//task01
+public class Triangle {
+    int side1 = 0;
+    int side2 = 0;
+    int side3 = 0;
+
+    public Triangle(int side1, int side2, int side3) {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    public void triangleDetails() {
+        System.out.println("Three sides of the triangle are: " + side1 + ", " + side2 + ", " + side3);
+        System.out.println("Perimeter: " + (side1 + side2 + side3));
+    }
+
+    public String printTriangleType() {
+        if (side1 == side2 && side2 == side3 && side1 == side3) {
+            return "This is an Equilateral Triangle.";
+        } else if (side1 == side2 || side2 == side3 || side1 == side3) {
+            return "This is an Isosceles Triangle.";
+        } else {
+            return "This is a Scalene Triangle.";
+        }
+    }
+
+    public void compareTriangles(Triangle other) {
+        if (this == other) {
+            System.out.println("These two triangle objects have the same address.");
+        } else if (this.side1 == other.side1 && this.side2 == other.side2 && this.side3 == other.side3) {
+            System.out.println("Addresses are different but the sides of the triangles are equal.");
+        } else if ((this.side1 + this.side2 + this.side3) == (other.side1 + other.side2 + other.side3)) {
+            System.out.println("Only the perimeter of both triangles is equal.");
+        } else {
+            System.out.println("Addresses, length of the sides and perimeter all are different.");
+        }
+    }
+}
+
+//task02
+public class Player {
+    String name = "";
+    int hp = 0;
+    String[] defeated = new String[1024];
+    int defeatedCount = 0;
+
+    public Player(String name, int hp) {
+        this.name = name;
+        this.hp = hp;
+        this.defeated = new String[1024];
+        System.out.println(name + " joined the game");
+        System.out.println("HP: " + hp);
+    }
+
+    public Player(String name) {
+        this.name = name;
+        this.hp = 100;
+        this.defeated = new String[1024];
+        System.out.println(name + " joined the game");
+        System.out.println("HP: " + hp);
+    }
+
+    public void viewInfo() {
+        System.out.println("Player Name: " + name);
+        System.out.println("Current HP: " + hp);
+
+        if (defeatedCount > 0) {
+            System.out.println("Defeated: ");
+            for (int i = 0; i < defeatedCount; i++) {
+                System.out.print(defeated[i] + ", ");
+            }
+            System.out.println();
+        }
+    }
+
+    void defeatVillainCore(char boostChar, String vName, int vHp) {
+        
+        if ((boostChar >= '1') && (boostChar <= '9')) {
+            int boost = Character.getNumericValue(boostChar);
+            this.hp = (this.hp * boost);
+            System.out.println("HP with " + boost + "x boost: " + this.hp);
+        }
+
+        if (this.hp >= vHp) {
+            this.defeated[defeatedCount] = vName;
+            this.defeatedCount++;
+            System.out.println("defeated " + vName);
+            this.hp += vHp;
+
+        } else {
+            System.out.println("failed to defeat " + vName);
+        }
+    }
+
+    public void defeatVillain(String vName, int vHp) {
+        this.defeatVillainCore('0', vName, vHp);
+    }
+
+    public void defeatVillain(char boostChar, String vName, int vHp) {
+        this.defeatVillainCore(boostChar, vName, vHp);
+    }
+
+    public void defeatVillain(Player villain) {
+        this.defeatVillainCore('0', villain.name, villain.hp);
+    }
+
+}
+
+//task03
+public class Student {
+    public String name = null;
+    public int id = 0;
+    public String email = null;
+    public String dept = null;
+    private String password = null;
+    private boolean loginStatus = false;
+    public String[] courses = new String[8];
+
+    public Student(String name, int id, String dept) {
+        this.name = name;
+        this.id = id;
+        this.dept = dept;
+        System.out.println("Student object is created");
+    }
+
+    public void setLogin(boolean status) {
+        this.loginStatus = status;
+    }
+
+    public boolean getLogin() {
+        return loginStatus;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isPasswordSet() {
+        if(this.password != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
+
+public class Connect {
+    int totalAdvisee = 0;
+    Student[] adviseeList = new Student[5];
+
+    public Connect() {
+        System.out.println("Connect is ready to use!");
+    }
+
+    public void login(Student student) {
+        if(student.email != null && student.isPasswordSet() == true) {
+            student.setLogin(true);
+            System.out.println("Login successful");
+        } else {
+            System.out.println("Email and password need to be set.");
+        }
+    }
+
+    public void advising(Student student, String ... courses) {
+        if(student.getLogin() == true) {
+            if(courses.length <= 0) {
+                System.out.println("You haven't selected any courses.");
+            } else if (courses.length > 3) {
+                System.out.println("You need special approval to take more than 3 courses.");
+            } else {
+                for(int i = 0; i < courses.length; i++) {
+                    student.courses[i] = courses[i];
+                }
+                adviseeList[totalAdvisee] = student;
+                totalAdvisee++;
+                System.out.println("Advising successful!");
+            }
+        } else {
+            System.out.println("Please login to advise courses!");
+        }
+    }
+
+    public void allAdviseeInfo() {
+        System.out.println("Total Advisee: " + totalAdvisee);
+        for(int i = 0; i < totalAdvisee; i++) {
+            System.out.print("Name: " + adviseeList[i].name + " ");
+            System.out.println("ID: " + adviseeList[i].id);
+            System.out.println("Department: " + adviseeList[i].dept);
+            System.out.println("Advised Courses: ");
+
+            for(int j = 0; j < adviseeList[i].courses.length; j++) {
+                if(adviseeList[i].courses[j] != null) {
+                    System.out.print(adviseeList[i].courses[j] + " ");
+                }
+            }
+            System.out.println();
+            System.out.println("==============");
+        }
+    }
+
+}
+
+//task04
+public class Cargo {
+    private String name = null;
+    private int weight = 0;
+
+    public Cargo(String name, int weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+}
+
+public class Spaceship {
+    String name = null;
+    int capacity = 0;
+    Cargo[] cargoList = new Cargo[100];
+    int cargoCount = 0;
+    int totalWeight = 0;
+
+    public Spaceship(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    public void loadCargo(Cargo cargo) {
+        if (this.cargoCount < cargoList.length) {
+            if (cargo.getWeight() + totalWeight <= capacity) {
+                cargoList[cargoCount] = cargo;
+                cargoCount++;
+                totalWeight += cargo.getWeight();
+            } else {
+                System.out.println("Warning: Unable to load " + cargo.getName() + " inside " + this.name +". Exceeds capacity by " + (cargo.getWeight() + totalWeight - capacity) + ".");
+            }
+        } else {
+            System.out.println("Cargo list is full. Cannot load more cargo.");
+        }
+    }
+
+    public void displayDetails() {
+
+        System.out.println("Spaceship Name: " + name);
+        System.out.println("Capacity: " + capacity);
+        System.out.println("Current Cargo Weight: " + totalWeight);
+        System.out.print("Cargo: ");
+        for(int i = 0; i < cargoList.length; i++) {
+            if(cargoList[i] != null) {
+                System.out.print(cargoList[i].getName() + " ");
+            }
+        }
+        System.out.println();
+    }
+}
